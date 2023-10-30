@@ -4,6 +4,60 @@ var showsignin = true;
 var signinpage = document.getElementById('loginscreen');
 console.log(showsignin);
 
+
+
+
+
+function loginCredentials(name, password) {
+    fetch('http://35.188.225.12/backend/signin.php', {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json'
+        },
+        body: JSON.stringify({
+            name: name,
+            password: password
+        })
+    })
+    .then(response => response.text())
+    .then(data => {
+        console.log(data + "test");
+        if (data.trim() === "User signed in successfully!"){
+            showsignin = false;
+            
+            signinpage.style.display = 'none';
+        }
+    })
+    .catch(error => {
+        console.log('Error:', error);
+    });
+}
+
+function createCredentials(name, password) {
+    fetch('http://35.188.225.12/backend/newcreate.php', {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json'
+        },
+        body: JSON.stringify({
+            name: name,
+            password: password
+        })
+    })
+    .then(response => response.text())
+    .then(data => {
+        console.log(data + "test");
+        if (data.trim() === "User signed in successfully!"){
+            showsignin = false;
+            //signinpage.style.display = 'none';
+        }
+    })
+    .catch(error => {
+        console.log('Error:', error);
+    });
+}
+
+
 document.getElementById('loginbutton')
         .addEventListener('click', function() {
             var username = document.getElementById('loginname');
@@ -22,13 +76,13 @@ document.getElementById('loginbutton')
             else {
                 console.log("created username: " + username.value);
                 console.log("created password: " + password.value);
-                
+                loginCredentials(username.value, password.value);
                 username.value = "";
                 password.value = "";
-                showsignin = false;
+                //showsignin = false;
                 
                 console.log(showsignin);
-                signinpage.style.display = 'none';
+                //signinpage.style.display = 'none';
 
 
             }
@@ -53,13 +107,14 @@ document.getElementById('createbutton')
             else {
                 console.log("created username: " + username.value);
                 console.log("created password: " + password.value);
+                createCredentials(username.value, password.value);
                 
                 username.value = "";
                 password.value = "";
-                showsignin = false;
+                //showsignin = false;
                 
                 console.log(showsignin);
-                signinpage.style.display = 'none';
+                //signinpage.style.display = 'none';
 
             }
         });
