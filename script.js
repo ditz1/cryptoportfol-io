@@ -155,6 +155,7 @@ document.getElementById('createbutton')
 ////////////////////////////////////////////////
 ////////////////////PORTFOLIO///////////////////
 ////////////////////////////////////////////////
+
 function loadFolioDisplay(){
     if (showfolio) {
         console.log("folio showing");
@@ -163,4 +164,9 @@ function loadFolioDisplay(){
     }
 }
 
-
+document.getElementById('backtosignin')
+        .addEventListener('click', function() {
+            foliopage.style.display = 'none';;
+            signinpage.style.display = 'block';
+            console.log("test");
+        }); 
