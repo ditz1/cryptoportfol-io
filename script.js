@@ -7,6 +7,7 @@ console.log("this language sucks");
 
 var signinpage = document.getElementById('loginscreen');
 var foliopage = document.getElementById('folioscreen');
+var createdtext = document.getElementById('createacc');
 var uidtext = document.getElementById('loguid');
 var showsignin = true;
 var showfolio = false;
@@ -60,7 +61,10 @@ function createCredentials(name, password) {
     .then(response => response.text())
     .then(data => {
         console.log(data + "test");
-        if (data.trim() === "User signed in successfully!"){
+        if (data.length < 18){
+            createdtext.textContent = "created account!";
+            
+            
             showsignin = false;
             showfolio = true;
             
@@ -68,6 +72,7 @@ function createCredentials(name, password) {
     })
     .catch(error => {
         console.log('Error:', error);
+        
     });
 }
 
